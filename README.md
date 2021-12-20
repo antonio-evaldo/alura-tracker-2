@@ -4,9 +4,16 @@
 
 - Instalar e configurar o `vue-router` num projeto existente;
   - Vimos que o Vue é um framework progressivo e não vem com roteamento por padrão.
+  - Executamos `npm i vue-router@4`, que é versão correta para o Vue3.
 
 - Configurar o arquivo de rotas;
   - Criamos uma lista de objetos, indicando qual componente será responsável por qual rota.
+
+
+## Módulo 2
+
+- Instalar e configurar o Vuex para gerenciamento de estads globais.
+  - Executamos `npm i vuex@next`, que é a versão correta para o Vue3.
 
 # alura-tracker
 

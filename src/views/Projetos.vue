@@ -28,42 +28,45 @@
       <tbody>
         <tr v-for="(projeto, key) in projetos" :key="key">
           <td>{{ projeto.id }}</td>
-          <td>{{ projeto.nome }} </td>
+          <td>{{ projeto.nome }}</td>
         </tr>
       </tbody>
     </table>
-    <Box v-else class="mt-3">
-      Ainda não há projetos :(
-    </Box>
+    <Box v-else class="mt-3">Ainda não há projetos.</Box>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import IProjeto from "../interfaces/IProjeto";
-import Box from '../components/Box.vue'
+import { computed, defineComponent } from "vue";
+
+import Box from "../components/Box.vue";
+import { useStore } from "@/store";
 
 export default defineComponent({
   name: "Projetos",
   components: {
-    Box
+    Box,
+  },
+
+  setup() {
+    const store = useStore();
+
+    return {
+      store,
+      projetos: computed(() => store.state.projetos),
+    };
   },
 
   data() {
     return {
       nomeDoProjeto: "",
-      projetos: [] as IProjeto[],
     };
   },
 
   methods: {
     salvar() {
-      const projeto: IProjeto = {
-        id: new Date().toISOString(),
-        nome: this.nomeDoProjeto,
-      };
+      this.store.commit("ADICIONA_PROJETO", this.nomeDoProjeto);
 
-      this.projetos.push(projeto);
       this.nomeDoProjeto = "";
     },
   },
