@@ -43,6 +43,7 @@ import Temporizador from "./Temporizador.vue";
 import ITarefa from "@/interfaces/ITarefa";
 import { useStore } from "@/store";
 import IProjeto from "@/interfaces/IProjeto";
+import { ADICIONA_TAREFA } from '@/store/tipos-mutacoes';
 
 export default defineComponent({
   name: "Formulario",
@@ -53,6 +54,7 @@ export default defineComponent({
     const store = useStore();
 
     return {
+      store,
       projetos: computed(() => store.state.projetos),
     };
   },
@@ -76,7 +78,7 @@ export default defineComponent({
         projeto,
       };
 
-      this.$emit("aoFinalizarTarefa", tarefa);
+      this.store.commit(ADICIONA_TAREFA, tarefa);
 
       this.descricao = "";
     },

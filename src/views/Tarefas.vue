@@ -1,9 +1,9 @@
 <template>
-  <Formulario @aoFinalizarTarefa="adicionarTarefa" />
+  <Formulario />
 
   <div class="lista">
     <Tarefa
-      v-for="(tarefa, index) in tarefasOrdenadas"
+      v-for="(tarefa, index) in tarefas"
       :key="index"
       :tarefa="tarefa"
     />
@@ -13,11 +13,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
+
+import { useStore } from "@/store";
 import Box from "../components/Box.vue";
 import Formulario from "../components/Formulario.vue";
 import Tarefa from "../components/Tarefa.vue";
-import ITarefa from "../interfaces/ITarefa";
+// import ITarefa from "../interfaces/ITarefa";
 
 export default defineComponent({
   name: "Tarefas",
@@ -27,23 +29,20 @@ export default defineComponent({
     Box,
   },
 
-  data() {
+  setup() {
+    const store = useStore();
+
     return {
-      tarefas: [] as ITarefa[]
+      // store,
+      tarefas: computed(() => store.state.tarefas),
     };
   },
 
-  computed: {
-    tarefasOrdenadas(): ITarefa[] {
-      return [...this.tarefas].reverse();
-    },
-  },
-
-  methods: {
-    adicionarTarefa(tarefa: ITarefa) {
-      this.tarefas.push(tarefa);
-    },
-  },
+  // computed: {
+  //   tarefasOrdenadas(): ITarefa[] {
+  //     return [...this.tarefas].reverse();
+  //   },
+  // },
 });
 </script>
 
