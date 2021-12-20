@@ -41,8 +41,8 @@ import { computed, defineComponent } from "vue";
 
 import Temporizador from "./Temporizador.vue";
 import ITarefa from "@/interfaces/ITarefa";
-import { useStore } from '@/store';
-import IProjeto from '@/interfaces/IProjeto';
+import { useStore } from "@/store";
+import IProjeto from "@/interfaces/IProjeto";
 
 export default defineComponent({
   name: "Formulario",
@@ -66,7 +66,9 @@ export default defineComponent({
 
   methods: {
     finalizarTarefa(tempoDecorrido: number): void {
-      const projeto = this.projetos.find((proj) => proj.id === this.idProjeto) as IProjeto;
+      const projeto = this.projetos.find(
+        (proj) => proj.id === this.idProjeto
+      ) as IProjeto;
 
       const tarefa: ITarefa = {
         duracaoEmSegundos: tempoDecorrido,

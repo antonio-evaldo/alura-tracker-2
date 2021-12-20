@@ -15,6 +15,17 @@
 - Instalar e configurar o Vuex para gerenciamento de estads globais.
   - Executamos `npm i vuex@next`, que é a versão correta para o Vue3.
 
+## Módulo 3
+
+- Manipular o estado;
+  - Inserimos, editamos, excluímos e listamos os projetos.
+
+- Rotas aninhadas;
+  - Agrupar rotas dentro de um mesmo contexto.
+  
+- Tipos de mutações;
+  - Extraímos os nomes das mutações para constantes.
+
 # alura-tracker
 
 ## Project setup

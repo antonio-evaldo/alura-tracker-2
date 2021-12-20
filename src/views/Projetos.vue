@@ -1,75 +1,16 @@
 <template>
-  <section class="projetos">
-    <h1 class="title">Projetos</h1>
+  <div class="projetos">
+    <div class="title">Projetos</div>
 
-    <form @submit.prevent="salvar">
-      <div class="field">
-        <label for="nomeDoProjeto" class="label">Nome do Projeto</label>
-        <input
-          type="text"
-          class="input"
-          v-model="nomeDoProjeto"
-          id="nomeDoProjeto"
-        />
-      </div>
-
-      <div class="field">
-        <button type="submit" class="button">Salvar</button>
-      </div>
-    </form>
-
-    <table class="table is-fullwidth" v-if="projetos.length">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(projeto, key) in projetos" :key="key">
-          <td>{{ projeto.id }}</td>
-          <td>{{ projeto.nome }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <Box v-else class="mt-3">Ainda não há projetos.</Box>
-  </section>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-
-import Box from "../components/Box.vue";
-import { useStore } from "@/store";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Projetos",
-  components: {
-    Box,
-  },
-
-  setup() {
-    const store = useStore();
-
-    return {
-      store,
-      projetos: computed(() => store.state.projetos),
-    };
-  },
-
-  data() {
-    return {
-      nomeDoProjeto: "",
-    };
-  },
-
-  methods: {
-    salvar() {
-      this.store.commit("ADICIONA_PROJETO", this.nomeDoProjeto);
-
-      this.nomeDoProjeto = "";
-    },
-  },
 });
 </script>
 
