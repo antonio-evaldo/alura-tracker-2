@@ -26,6 +26,11 @@
 - Tipos de mutações;
   - Extraímos os nomes das mutações para constantes.
 
+## Módulo 4
+
+- Controlar o estado;
+  - Desenvolvendo a lista de notificações.
+
 # alura-tracker
 
 ## Project setup

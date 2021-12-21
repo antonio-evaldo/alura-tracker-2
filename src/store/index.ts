@@ -1,12 +1,14 @@
 import IProjeto from '@/interfaces/IProjeto';
 import ITarefa from '@/interfaces/ITarefa';
+import INotificacao from '@/interfaces/INotificacao';
 import { InjectionKey } from 'vue';
 import { createStore, Store, useStore as vuexUseStore } from 'vuex';
-import { ADICIONA_PROJETO, ADICIONA_TAREFA, ALTERA_PROJETO, ALTERA_TAREFA, EXCLUI_PROJETO, EXCLUI_TAREFA } from './tipos-mutacoes';
+import { ADICIONA_PROJETO, ADICIONA_TAREFA, ALTERA_PROJETO, ALTERA_TAREFA, EXCLUI_PROJETO, EXCLUI_TAREFA, NOTIFICAR } from './tipos-mutacoes';
 
 interface Estado {
   projetos: IProjeto[],
   tarefas: ITarefa[],
+  notificacoes: INotificacao[],
 }
 
 export const key: InjectionKey<Store<Estado>> = Symbol();
@@ -14,7 +16,8 @@ export const key: InjectionKey<Store<Estado>> = Symbol();
 export const store = createStore<Estado>({
   state: {
     projetos: [],
-    tarefas: []
+    tarefas: [],
+    notificacoes: [],
   },
 
   mutations: {
@@ -41,6 +44,14 @@ export const store = createStore<Estado>({
           return tarefa;
         }
       );
+
+      // state.tarefas.forEach(tarefa => {
+      //   if (tarefa.projeto.id === projeto.id) {
+      //     store.commit(ALTERA_TAREFA, {
+      //       ...tarefa, projeto
+      //     } as ITarefa);
+      //   }
+      // });
     },
 
     [EXCLUI_PROJETO](state, id: string) {
@@ -60,7 +71,17 @@ export const store = createStore<Estado>({
 
     [EXCLUI_TAREFA](state, idTarefa) {
       state.tarefas = state.tarefas.filter(t => t.id !== idTarefa)
-    }
+    },
+
+    [NOTIFICAR](state, novaNotificacao: INotificacao) {
+      novaNotificacao.id = new Date().getTime();
+      state.notificacoes.push(novaNotificacao);
+
+      setTimeout(() => {
+        state.notificacoes =
+          state.notificacoes.filter(n => n.id !== novaNotificacao.id);
+      }, 3000);
+    },
   },
 });
 
