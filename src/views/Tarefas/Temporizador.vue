@@ -22,11 +22,21 @@
 import { defineComponent } from "vue";
 import BotaoForm from "./BotaoForm.vue";
 import Cronometro from "./Cronometro.vue";
+import { TipoNotificacao } from "@/interfaces/INotificacao";
+import useNotificador from "@/hooks/notificador";
 
 export default defineComponent({
   name: "Temporizador",
   emits: ["aoFinalizarTemporizador"],
   components: { Cronometro, BotaoForm },
+
+  setup() {
+    const { notificar } = useNotificador();
+
+    return {
+      notificar,
+    };
+  },
 
   data() {
     return {
@@ -36,20 +46,33 @@ export default defineComponent({
     };
   },
 
+  props: {
+    temProjeto: { type: Boolean },
+  },
+
   methods: {
     iniciar() {
       this.cronometroAtivo = true;
-      if (this.cronometroAtivo) {
-        this.cronometroID = setInterval(() => {
-          this.tempoEmSegundos++;
-        }, 1000);
-      }
+
+      this.cronometroID = setInterval(() => {
+        this.tempoEmSegundos++;
+      }, 1000);
     },
+
     finalizar() {
-      clearInterval(this.cronometroID);
-      this.cronometroAtivo = false;
-      this.$emit("aoFinalizarTemporizador", this.tempoEmSegundos);
-      this.tempoEmSegundos = 0;
+      if (this.temProjeto) {
+        clearInterval(this.cronometroID);
+        this.cronometroAtivo = false;
+        
+        this.$emit("aoFinalizarTemporizador", this.tempoEmSegundos);
+        this.tempoEmSegundos = 0;
+      } else {
+        this.notificar(
+          "Selecione um projeto",
+          "A nova tarefa deve estar vinculada a um projeto.",
+          TipoNotificacao.ATENCAO
+        );
+      }
     },
   },
 });

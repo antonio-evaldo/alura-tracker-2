@@ -30,7 +30,10 @@
       </div>
 
       <div class="column">
-        <Temporizador @aoFinalizarTemporizador="finalizarTarefa" />
+        <Temporizador
+          @aoFinalizarTemporizador="finalizarTarefa"
+          :temProjeto="Boolean(idProjeto)"
+        />
       </div>
     </div>
   </div>
@@ -41,9 +44,10 @@ import { computed, defineComponent } from "vue";
 
 import Temporizador from "./Temporizador.vue";
 import ITarefa from "@/interfaces/ITarefa";
-import { useStore } from "@/store";
 import IProjeto from "@/interfaces/IProjeto";
-import { ADICIONA_TAREFA } from '@/store/tipos-mutacoes';
+
+import { ADICIONA_TAREFA } from "@/store/tipos-mutacoes";
+import { useStore } from "@/store";
 
 export default defineComponent({
   name: "Formulario",
