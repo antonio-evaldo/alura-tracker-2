@@ -17,9 +17,8 @@ import { computed, defineComponent } from "vue";
 
 import { useStore } from "@/store";
 import Box from "../components/Box.vue";
-import Formulario from "../components/Formulario.vue";
-import Tarefa from "../components/Tarefa.vue";
-// import ITarefa from "../interfaces/ITarefa";
+import Formulario from "./Tarefas/Formulario.vue";
+import Tarefa from "./Tarefas/Tarefa.vue";
 
 export default defineComponent({
   name: "Tarefas",
