@@ -31,6 +31,17 @@
 - Controlar o estado;
   - Desenvolvendo a lista de notificações.
 
+## Módulo 5
+
+- Mixins;
+  - Como reaproveitar código e qual a fragilidade dessa técnica.
+
+- Composition API;
+  - Como reaproveitar código de uma forma mais coesa e legível.
+
+- Computed - debugging;
+  - Como depurar código de propriedades computadas.
+
 # alura-tracker
 
 ## Project setup

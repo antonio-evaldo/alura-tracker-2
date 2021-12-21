@@ -33,16 +33,9 @@ export default defineComponent({
     const store = useStore();
 
     return {
-      // store,
       tarefas: computed(() => store.state.tarefas),
     };
   },
-
-  // computed: {
-  //   tarefasOrdenadas(): ITarefa[] {
-  //     return [...this.tarefas].reverse();
-  //   },
-  // },
 });
 </script>
 

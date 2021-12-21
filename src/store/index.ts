@@ -44,14 +44,6 @@ export const store = createStore<Estado>({
           return tarefa;
         }
       );
-
-      // state.tarefas.forEach(tarefa => {
-      //   if (tarefa.projeto.id === projeto.id) {
-      //     store.commit(ALTERA_TAREFA, {
-      //       ...tarefa, projeto
-      //     } as ITarefa);
-      //   }
-      // });
     },
 
     [EXCLUI_PROJETO](state, id: string) {
