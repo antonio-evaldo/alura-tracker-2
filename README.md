@@ -62,6 +62,31 @@ export default defineComponent({
 
 ## Módulo 3
 
+- Passar e obter um *route param* para uma rota. No arquivo de rotas:
+
+```ts
+const routes: RouteRecordRaw[] = [
+  {
+    path: 'projects/:id',
+    name: 'Edit project',
+    component: Formulario,
+    props: true,
+  }
+]
+```
+
+E no componente, recebemos o parâmetro via props:
+
+```
+export default defineComponent({
+  name: 'Formulario',
+  
+  props: {
+    id: { type: String },
+  },
+});
+```
+
 - Manipular o estado;
   - Inserimos, editamos, excluímos e listamos os projetos.
 
