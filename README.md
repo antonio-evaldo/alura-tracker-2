@@ -1,4 +1,4 @@
-# Vue3: Começando com o framework
+# Vue3: Avançando com o framework
 
 ## Módulo 1
 
@@ -9,16 +9,84 @@
 - Configurar o arquivo de rotas;
   - Criamos uma lista de objetos, indicando qual componente será responsável por qual rota.
 
-
 ## Módulo 2
 
-- Instalar e configurar o Vuex para gerenciamento de estads globais.
+- Instalar e configurar o Vuex para gerenciamento de estados globais.
   - Executamos `npm i vuex@next`, que é a versão correta para o Vue3.
+
+Template básico para configurar uma *store* do Vuex:
+
+```ts
+import { InjectionKey } from 'vue';
+import { Store, createStore, useStore as vuexUseStore } from 'vuex';
+
+interface IProject {
+  id: string;
+  name: string;
+}
+
+interface State {
+  state: {
+    projects: IProject[];
+  }
+}
+
+const key: InjectionKey<Store<State>> = Symbol();
+
+export const store = createStore<State>({
+  state: {
+    projects: [],
+  }
+});
+
+export function useStore(): Store<State> {
+  return vuexUseStore(key);
+};
+```
+
+E para acessar os projetos de forma dinâmica em um componente, usamos a função `computed()` para acessar `store.state.projects`:
+
+```ts
+export default defineComponent({
+  name: 'ComponentName',
+
+  setup() {
+    const store = useStore();
+
+    return {
+      projects: computed(() => store.state.projects)
+    };
+  }
+}) 
+```
 
 ## Módulo 3
 
 - Manipular o estado;
   - Inserimos, editamos, excluímos e listamos os projetos.
+
+Exemplo de *mutation* do *store*:
+
+```ts
+  const ADD_PROJECT = 'ADD_PROJECT';
+
+  export const store = createStore<State>() {
+    state: {
+      projects: [],
+    },
+
+    mutations: {
+      [ADD_PROJECT](state, newProject: IProject) {
+        const project = {
+          id: new Date().toISOString(),
+          name: newProject.name,
+        };
+
+        state.projects.push(project);
+      }
+    }
+  };
+```
 
 - Rotas aninhadas;
   - Agrupar rotas dentro de um mesmo contexto.

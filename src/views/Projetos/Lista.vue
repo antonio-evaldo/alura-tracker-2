@@ -18,7 +18,7 @@
       </thead>
 
       <tbody>
-        <tr v-for="(projeto, key) in projetos" :key="key">
+        <tr v-for="projeto in projetos" :key="projeto.id">
           <td>{{ projeto.id }}</td>
           <td>{{ projeto.nome }}</td>
           <td>
