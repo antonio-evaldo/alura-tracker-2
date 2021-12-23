@@ -77,7 +77,7 @@ const routes: RouteRecordRaw[] = [
 
 E no componente, recebemos o parâmetro via props:
 
-```
+```ts
 export default defineComponent({
   name: 'Formulario',
   
